@@ -4,7 +4,7 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net8.0</TargetFramework>
 		<Platforms>AnyCPU</Platforms>
-		<Version>3.0.12</Version>
+		<Version>3.0.0-preview</Version>
 		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
 		<PublisherName>SpinSha.re</PublisherName>
 		<UseAppRoot>true</UseAppRoot>
@@ -95,5 +95,16 @@
 		<Copy SourceFiles="@(UiBuildOutputFiles)" DestinationFiles="@(UiBuildOutputFiles->'$(TargetDir)\$(WwwRoot)%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(EmbedWwwRoot)' != 'true' " />
 
 		<RemoveDir Directories="$(UiRoot)$(UiBuildOutput)" />
+	</Target>
+
+	<Target AfterTargets="Publish" Name="CopyPublishedSingleFile">
+		<!-- Move single file application (Windows, macOS, Linux) to {{ProjectDir}}/publish/build path after build completed -->
+		<ItemGroup>
+			<PublishFiles Include="$(PublishDir)\**\*.*" />
+		</ItemGroup>
+
+		<Copy
+			SourceFiles="@(PublishFiles)"
+			DestinationFolder="$(ProjectDir)\..\publish\build\$(AssemblyName).$(Version).$(RuntimeIdentifier)\%(RecursiveDir)" />
 	</Target>
 </Project>

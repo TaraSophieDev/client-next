@@ -269,7 +269,7 @@ fi
 # Set version from first argument
 # or get latest tag from git and remove the "v" prefix
 if [ -z "$2" ]; then
-    APP_VERSION=$((git describe --tags --abbrev=0 2> /dev/null || echo "3.0.12") | sed 's/v//')
+    APP_VERSION=$((git describe --tags --abbrev=0 2> /dev/null || echo "3.0.0") | sed 's/v//')
 else
     APP_VERSION=$2
 fi
