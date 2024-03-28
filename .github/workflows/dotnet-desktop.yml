@@ -30,6 +30,7 @@ jobs:
       - name: Build & Publish
         run: |
           cd ./publish
+          git update-index --chmod=+x publish.sh
           ./publish.sh "win-x64 linux-x64" "3.0.0-preview"
         shell: bash
       - name: List Files
