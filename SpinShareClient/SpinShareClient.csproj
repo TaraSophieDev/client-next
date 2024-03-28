@@ -4,18 +4,24 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net8.0</TargetFramework>
 		<Platforms>AnyCPU</Platforms>
-		<Version>3.0.11-preview</Version>
-   		<!-- Generate embedded file manifest when using the Photino.NET StaticFileServer -->
-		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
-		<EmbedWwwRoot>true</EmbedWwwRoot>
+		<Version>3.0.12</Version>
 		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
 		<PublisherName>SpinSha.re</PublisherName>
 		<UseAppRoot>true</UseAppRoot>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<PublishSingleFile>true</PublishSingleFile>
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+		<ApplicationIcon>../publish/templates/win/app.ico</ApplicationIcon>
+		<SelfContained>true</SelfContained>
+		<PublishSingleFile>true</PublishSingleFile>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+		<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+		<EnableDefaultContent>false</EnableDefaultContent>
+		<EnableDefaultContentItems>false</EnableDefaultContentItems>
+		<DebugType>embedded</DebugType>
+		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+		<EmbedWwwRoot>true</EmbedWwwRoot>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
