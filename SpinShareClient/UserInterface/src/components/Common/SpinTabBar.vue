@@ -88,50 +88,48 @@ gamepad.on('buttonReleased', async (buttonIndex) => {
     padding: 0 25px;
     gap: 10px;
 }
-</style>
 
-<style lang="scss" scoped v-if="window.spinshare.settings.IsConsole">
-.spin-tab-bar {
-    position: relative;
-    justify-content: center;
-    border: 0;
-    gap: 5px;
-    padding: 25px 40px;
-    left: 0;
+.ui-console .spin-tab-bar {
+  position: relative;
+  justify-content: center;
+  border: 0;
+  gap: 5px;
+  padding: 25px 40px;
+  left: 0;
+  align-items: center;
+
+  & .console-hint {
+    display: flex;
     align-items: center;
+    flex-grow: 1;
 
-    & .console-hint {
-        display: flex;
-        align-items: center;
-        flex-grow: 1;
+    &.left {
+      justify-content: flex-start;
 
-        &.left {
-            justify-content: flex-start;
-
-            & .hint-prompt {
-                border-top-left-radius: 20px;
-            }
-        }
-        &.right {
-            justify-content: flex-end;
-
-            & .hint-prompt {
-                border-top-right-radius: 20px;
-            }
-        }
-
-        & .hint-prompt {
-            height: 42px;
-            width: 42px;
-            border-radius: 3px;
-            background: #fff;
-            color: #000;
-            font-size: 1rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      & .hint-prompt {
+        border-top-left-radius: 20px;
+      }
     }
+    &.right {
+      justify-content: flex-end;
+
+      & .hint-prompt {
+        border-top-right-radius: 20px;
+      }
+    }
+
+    & .hint-prompt {
+      height: 42px;
+      width: 42px;
+      border-radius: 3px;
+      background: #fff;
+      color: #000;
+      font-size: 1rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 </style>

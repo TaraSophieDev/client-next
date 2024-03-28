@@ -388,46 +388,43 @@ const handleAddToQueue = (event) => {
         cursor: pointer;
     }
 }
-</style>
+.ui-console .chart-item {
+  height: 120px;
+  border-radius: 4px;
+  gap: 15px;
 
-<style lang="scss" scoped v-if="window.spinshare.settings.IsConsole">
-.chart-item {
-    height: 120px;
-    border-radius: 4px;
-    gap: 15px;
+  & .cover {
+    width: 100px;
+    height: 100px;
 
-    & .cover {
-        width: 100px;
-        height: 100px;
-
-        & .tag {
-            height: 30px;
-            width: 30px;
-            font-size: 1.15rem;
-        }
+    & .tag {
+      height: 30px;
+      width: 30px;
+      font-size: 1.15rem;
     }
-    & .meta {
-        gap: 5px;
+  }
+  & .meta {
+    gap: 5px;
 
-        & .title {
-            font-size: 1.05rem;
-            font-weight: bold;
-        }
-
-        & .difficulties {
-            gap: 10px;
-            margin-top: 10px;
-
-            & > span {
-                padding: 6px 14px;
-                border-radius: 3px;
-                font-size: 0.75rem;
-            }
-        }
+    & .title {
+      font-size: 1.05rem;
+      font-weight: bold;
     }
 
-    &:focus {
-        outline: 3px solid silver;
+    & .difficulties {
+      gap: 10px;
+      margin-top: 10px;
+
+      & > span {
+        padding: 6px 14px;
+        border-radius: 3px;
+        font-size: 0.75rem;
+      }
     }
+  }
+
+  &:focus {
+    outline: 3px solid silver;
+  }
 }
 </style>

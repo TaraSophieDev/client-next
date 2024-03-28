@@ -206,27 +206,25 @@ onMounted(() => {
         }
     }
 }
-</style>
 
-<style lang="scss" v-if="window.spinshare.settings.IsConsole">
-.layout-setup {
-    padding: 20px 40px;
-    align-items: unset;
+.ui-console .layout-setup {
+  padding: 20px 40px;
+  align-items: unset;
 
-    & main {
-        max-width: unset;
-        max-height: unset;
-        margin: unset;
-        display: grid;
-        grid-template-rows: auto auto 1fr;
-        align-items: center;
-        width: 100%;
+  & main {
+    max-width: unset;
+    max-height: unset;
+    margin: unset;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    align-items: center;
+    width: 100%;
 
-        & > .content {
-            justify-self: center;
-            max-width: 600px;
-            gap: 50px;
-        }
+    & > .content {
+      justify-self: center;
+      max-width: 600px;
+      gap: 50px;
     }
+  }
 }
 </style>

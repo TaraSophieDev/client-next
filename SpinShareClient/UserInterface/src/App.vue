@@ -198,13 +198,11 @@ if (window.spinshare.settings.IsConsole) {
         overflow-y: scroll;
     }
 }
-</style>
 
-<style lang="scss" v-if="window.spinshare.settings.IsConsole">
-:root {
-    font-size: 18px;
+:root:has(.ui-console) {
+  font-size: 18px;
 }
-#app {
-    height: calc(100% - 60px);
+.ui-console #app {
+  height: calc(100% - 60px);
 }
 </style>

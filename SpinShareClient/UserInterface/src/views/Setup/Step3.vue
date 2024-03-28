@@ -98,8 +98,8 @@ const changeTheme = () => {
 };
 </script>
 
-<style lang="scss" v-if="window.spinshare.settings.IsConsole">
-.select {
+<style lang="scss">
+.ui-console .select {
     width: 600px;
 }
 </style>

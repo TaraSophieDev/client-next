@@ -145,20 +145,18 @@ const handleClick = () => {
         cursor: pointer;
     }
 }
-</style>
 
-<style lang="scss" scoped v-if="window.spinshare.settings.IsConsole">
-.user-item {
-    & img {
-        width: 64px;
-        height: 64px;
-    }
-    & .meta {
-        gap: 6px;
-    }
+.ui-console .user-item {
+  & img {
+    width: 64px;
+    height: 64px;
+  }
+  & .meta {
+    gap: 6px;
+  }
 
-    &:focus {
-        outline: 3px solid silver;
-    }
+  &:focus {
+    outline: 3px solid silver;
+  }
 }
 </style>
