@@ -27,9 +27,17 @@ jobs:
         run: dotnet restore
       - name: Run tests
         run: dotnet test --no-restore --verbosity normal
+      - name: Install flatpak dependencies
+        run: |
+          apt install flatpak flatpak-builder
+          flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          flatpak install org.gnome.Sdk/x86_64/45
+          flatpak install org.gnome.Platform/x86_64/45
+        shell: bash
       - name: List Files
         run: |
           ls -lp ./publish
+        shell: bash
       - name: Build & Publish
         run: |
           cd ./publish
@@ -39,6 +47,7 @@ jobs:
       - name: List Files
         run: |
           ls -lp ./publish/output
+        shell: bash
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
