@@ -27,6 +27,9 @@ jobs:
         run: dotnet restore
       - name: Run tests
         run: dotnet test --no-restore --verbosity normal
+      - name: List Files
+        run: |
+          ls -lp ./publish
       - name: Build & Publish
         run: |
           cd ./publish
