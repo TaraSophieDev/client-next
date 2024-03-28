@@ -26,4 +26,4 @@ finish-args:
     - "--socket=wayland"
     - "--share=ipc"
     - "--share=network"
-    - "--filesystem=home"
+    - "--filesystem=host"
