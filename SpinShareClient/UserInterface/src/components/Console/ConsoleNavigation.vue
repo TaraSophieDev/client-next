@@ -3,7 +3,7 @@
         <div
             class="console-navigation"
             v-if="isOpen"
-            @click.self="emitter.emit('console-navigation-toggle')"
+            @click.self="toggleVisibility"
             role="dialog"
             aria-modal="true"
         >
@@ -122,10 +122,47 @@ const gamepad = useGamepad();
 gamepad.on('buttonReleased', async (buttonIndex) => {
     switch (buttonIndex) {
         case Buttons.MENU:
-            isOpen.value = !isOpen.value;
+            toggleVisibility();
             break;
     }
 });
+
+const toggleVisibility = async () => {
+    isOpen.value = !isOpen.value;
+
+    if (isOpen.value) {
+        document.body.querySelector('.layout-app').style.pointerEvents = 'none';
+
+        // Select active Element in navigation, fallback to first element
+        await nextTick();
+        let element;
+        element = document.body.querySelector(
+            '.console-navigation .router-link-exact-active, .console-navigation .active',
+        );
+
+        if (!element) {
+            element = document.body
+                .querySelector('.console-navigation')
+                .querySelector(focusableElements);
+        }
+
+        if (element) {
+            element.focus();
+        }
+    } else {
+        document.body.querySelector('.layout-app').style.pointerEvents = '';
+
+        // Select first Element in page
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.layout-app > main')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+    }
+};
 
 onMounted(() => {
     window.external.sendMessage(
@@ -135,30 +172,8 @@ onMounted(() => {
         }),
     );
 
-    emitter.on('console-navigation-toggle', async () => {
-        isOpen.value = !isOpen.value;
-
-        if (isOpen.value) {
-            // Select first Element in navigation
-            await nextTick();
-            const firstFocusableElement = document.body
-                .querySelector('.console-navigation')
-                .querySelector(focusableElements);
-
-            if (firstFocusableElement) {
-                firstFocusableElement.focus();
-            }
-        } else {
-            // Select first Element in page
-            await nextTick();
-            const firstFocusableElement = document.body
-                .querySelector('.layout-app > main')
-                .querySelector(focusableElements);
-
-            if (firstFocusableElement) {
-                firstFocusableElement.focus();
-            }
-        }
+    emitter.on('console-navigation-toggle', () => {
+        toggleVisibility();
     });
 
     emitter.on('queue-get-count-response', (data) => {

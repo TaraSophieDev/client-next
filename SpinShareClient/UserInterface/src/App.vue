@@ -127,13 +127,23 @@ if (window.spinshare.settings.IsConsole) {
      * @param direction
      */
     const moveFocus = (currentElement, direction) => {
+        const getEffectivePointerEvents = (element) => {
+            let pointerEvents = window.getComputedStyle(element).pointerEvents;
+            if (pointerEvents === 'none' || !element.parentElement) {
+                return pointerEvents;
+            }
+            return getEffectivePointerEvents(element.parentElement);
+        };
+
         const allFocussableElements = Array.from(
             document.body.querySelectorAll(focusableElements),
         ).filter((el) => {
-            return !!(
-                el.offsetWidth ||
-                el.offsetHeight ||
-                el.getClientRects().length
+            return (
+                !!(
+                    el.offsetWidth ||
+                    el.offsetHeight ||
+                    el.getClientRects().length
+                ) && getEffectivePointerEvents(el) !== 'none'
             );
         });
 
