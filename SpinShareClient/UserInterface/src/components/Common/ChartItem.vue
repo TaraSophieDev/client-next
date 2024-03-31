@@ -96,7 +96,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted, inject, onUnmounted } from 'vue';
 import router from '@/router';
 const emitter = inject('emitter');
 
@@ -202,24 +202,29 @@ onMounted(() => {
             },
         }),
     );
-});
 
-emitter.on('library-get-state-response', (state) => {
-    if (state.spinshareReference === props.fileReference) {
-        libraryState.value = state;
-    }
-});
-
-emitter.on('queue-item-update-response', (queueItem) => {
-    if (queueItem.FileReference === props.fileReference) {
-        queueState.value = queueItem.State;
-
-        if (queueItem.State === STATE_DONE) {
-            libraryState.value.installed = true;
-            libraryState.value.updated = true;
-            queueState.value = null;
+    emitter.on('library-get-state-response', (state) => {
+        if (state.spinshareReference === props.fileReference) {
+            libraryState.value = state;
         }
-    }
+    });
+
+    emitter.on('queue-item-update-response', (queueItem) => {
+        if (queueItem.FileReference === props.fileReference) {
+            queueState.value = queueItem.State;
+
+            if (queueItem.State === STATE_DONE) {
+                libraryState.value.installed = true;
+                libraryState.value.updated = true;
+                queueState.value = null;
+            }
+        }
+    });
+});
+
+onUnmounted(() => {
+    emitter.off('library-get-state-response');
+    emitter.off('queue-item-update-response');
 });
 
 const handleClick = () => {
@@ -389,42 +394,42 @@ const handleAddToQueue = (event) => {
     }
 }
 .ui-console .chart-item {
-  height: 120px;
-  border-radius: 4px;
-  gap: 15px;
+    height: 120px;
+    border-radius: 4px;
+    gap: 15px;
 
-  & .cover {
-    width: 100px;
-    height: 100px;
+    & .cover {
+        width: 100px;
+        height: 100px;
 
-    & .tag {
-      height: 30px;
-      width: 30px;
-      font-size: 1.15rem;
+        & .tag {
+            height: 30px;
+            width: 30px;
+            font-size: 1.15rem;
+        }
     }
-  }
-  & .meta {
-    gap: 5px;
+    & .meta {
+        gap: 5px;
 
-    & .title {
-      font-size: 1.05rem;
-      font-weight: bold;
+        & .title {
+            font-size: 1.05rem;
+            font-weight: bold;
+        }
+
+        & .difficulties {
+            gap: 10px;
+            margin-top: 10px;
+
+            & > span {
+                padding: 6px 14px;
+                border-radius: 3px;
+                font-size: 0.75rem;
+            }
+        }
     }
 
-    & .difficulties {
-      gap: 10px;
-      margin-top: 10px;
-
-      & > span {
-        padding: 6px 14px;
-        border-radius: 3px;
-        font-size: 0.75rem;
-      }
+    &:focus {
+        outline: 3px solid silver;
     }
-  }
-
-  &:focus {
-    outline: 3px solid silver;
-  }
 }
 </style>

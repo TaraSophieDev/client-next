@@ -266,4 +266,37 @@ const handleOpenInBrowser = () => {
         padding: 40px;
     }
 }
+
+.ui-console {
+    & .view-playlist-detail {
+        & .cover {
+            height: 300px;
+
+            & .shade {
+                & .content {
+                    & h1 {
+                        font-size: 2rem;
+                    }
+                    & .meta {
+                        gap: 15px;
+
+                        & .charts-count {
+                            gap: 10px;
+
+                            & > span:nth-child(2) {
+                                font-size: 1rem;
+                            }
+                        }
+
+                        & .tag-official {
+                            padding: 5px 15px;
+                            font-size: 1rem;
+                            gap: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 </style>

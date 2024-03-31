@@ -5,6 +5,7 @@
                 v-if="showMenu"
                 inputLabel="+"
                 actionLabel="MENU"
+                @click="toggleMenu"
             />
         </main>
         <aside>
@@ -58,6 +59,10 @@ const emitter = inject('emitter');
 const { t } = useI18n();
 const showMenu = ref(false);
 const items = ref([]);
+
+const toggleMenu = () => {
+    emitter.emit('console-navigation-toggle');
+};
 
 emitter.on('console-update-controller-hints', (hints) => {
     showMenu.value = !!hints.showMenu;

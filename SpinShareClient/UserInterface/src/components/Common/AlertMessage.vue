@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref, inject } from 'vue';
+import { ref, inject, onMounted, onUnmounted } from 'vue';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
@@ -28,15 +28,21 @@ const dialogRef = ref();
 const dialogTitle = ref(false);
 const dialogMessage = ref(false);
 
-emitter.on('alert-show', (options) => {
-    dialogTitle.value = options.title ?? false;
-    dialogMessage.value = options.message ?? false;
+onMounted(() => {
+    emitter.on('alert-show', (options) => {
+        dialogTitle.value = options.title ?? false;
+        dialogMessage.value = options.message ?? false;
 
-    dialogRef.value.showModal();
+        dialogRef.value.showModal();
+    });
+
+    emitter.on('alert-close', () => {
+        close();
+    });
 });
-
-emitter.on('alert-close', () => {
-    close();
+onUnmounted(() => {
+    emitter.off('alert-show');
+    emitter.off('alert-close');
 });
 
 const close = () => {

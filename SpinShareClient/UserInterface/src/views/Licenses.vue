@@ -4,6 +4,7 @@
             <SpinHeader :label="t('settings.thirdPartyLicenses.label')">
                 <SpinButton
                     icon="arrow-left"
+                    v-if="!window.spinshare.settings.IsConsole"
                     :label="t('general.back')"
                     @click="handleBack"
                 />
@@ -22,7 +23,22 @@ import { VueComponent } from '@/assets/third-party-licenses.md';
 import router from '@/router';
 
 import { useI18n } from 'vue-i18n';
+import { onMounted, inject } from 'vue';
+const emitter = inject('emitter');
 const { t } = useI18n();
+
+onMounted(async () => {
+    if (window.spinshare.settings.IsConsole) {
+        // Controller Hints
+        let controllerHintItems = [];
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
+});
 
 const handleBack = () => {
     router.push({

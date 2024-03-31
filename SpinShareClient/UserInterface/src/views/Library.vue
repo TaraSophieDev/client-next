@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted, inject, nextTick } from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import LibraryChartList from '@/components/Library/LibraryChartList.vue';
 import router from '@/router';
@@ -38,14 +38,47 @@ import SpinButton from '@/components/Common/SpinButton.vue';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
+import { Buttons, focusableElements } from '@/modules/useGamepad';
 const { t } = useI18n();
 
 const importingChart = ref(false);
 const loadingLibrary = ref(false);
 const library = ref([]);
 
-onMounted(() => {
+onMounted(async () => {
     loadLibrary();
+
+    if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.view-library')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
 });
 
 const handleOpenLibrary = () => {

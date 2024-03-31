@@ -37,13 +37,17 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick, inject } from 'vue';
 import { searchCharts, searchUsers, searchPlaylists } from '@/api/api';
 import SearchIntro from '@/components/Search/SearchIntro.vue';
 import SearchBar from '@/components/Search/SearchBar.vue';
 import ChartList from '@/components/Common/ChartList.vue';
 import UserList from '@/components/Common/UserList.vue';
 import PlaylistList from '@/components/Common/PlaylistList.vue';
+import { Buttons, focusableElements } from '@/modules/useGamepad';
+const emitter = inject('emitter');
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const isSearching = ref(false);
 const searchResultsType = ref(null);
@@ -75,7 +79,7 @@ const handleSearch = async (parameters) => {
     isSearching.value = false;
 };
 
-onMounted(() => {
+onMounted(async () => {
     if (route.query.type && route.query.query) {
         handleSearch({
             type: route.query.type,
@@ -83,6 +87,38 @@ onMounted(() => {
             filters: {
                 showExplicit: true,
             },
+        });
+    }
+
+    if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.view-search')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
         });
     }
 });

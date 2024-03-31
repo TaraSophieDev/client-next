@@ -11,6 +11,7 @@
         </transition>
     </router-view>
 
+    <ConsoleNavigation v-if="window.spinshare.settings.IsConsole" />
     <ControllerHintsFooter v-if="window.spinshare.settings.IsConsole" />
 
     <UpdateBanner />
@@ -28,6 +29,7 @@ import useGamepad, { Buttons, focusableElements } from '@/modules/useGamepad';
 import useInterfaceAudio, {
     InterfaceSounds,
 } from '@/modules/useInterfaceAudio';
+import ConsoleNavigation from '@/components/Console/ConsoleNavigation.vue';
 const emitter = inject('emitter');
 
 const router = useRouter();
@@ -200,9 +202,9 @@ if (window.spinshare.settings.IsConsole) {
 }
 
 :root:has(.ui-console) {
-  font-size: 18px;
+    font-size: 18px;
 }
 .ui-console #app {
-  height: calc(100% - 60px);
+    height: calc(100% - 60px);
 }
 </style>

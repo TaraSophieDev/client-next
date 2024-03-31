@@ -3,6 +3,7 @@
         class="chart-item"
         :class="isSpinShare ? 'is-spinshare' : 'is-local'"
         @click="handleClick"
+        tabindex="0"
     >
         <div
             class="cover"
@@ -167,6 +168,45 @@ const handleClick = () => {
     &.is-local {
         background: transparent;
         border: 1px solid rgba(var(--colorBaseText), 0.07);
+    }
+}
+.ui-console .chart-item {
+    height: 120px;
+    border-radius: 4px;
+    gap: 15px;
+
+    & .cover {
+        width: 100px;
+        height: 100px;
+
+        & .tag {
+            height: 30px;
+            width: 30px;
+            font-size: 1.15rem;
+        }
+    }
+    & .meta {
+        gap: 5px;
+
+        & .title {
+            font-size: 1.05rem;
+            font-weight: bold;
+        }
+
+        & .difficulties {
+            gap: 10px;
+            margin-top: 10px;
+
+            & > span {
+                padding: 6px 14px;
+                border-radius: 3px;
+                font-size: 0.75rem;
+            }
+        }
+    }
+
+    &:focus {
+        outline: 3px solid silver;
     }
 }
 </style>

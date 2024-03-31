@@ -4,6 +4,8 @@
             class="download-queue-backdrop"
             v-if="isActive"
             @click.self="changeState(false)"
+            role="dialog"
+            aria-modal="true"
         >
             <section class="download-queue">
                 <SpinHeader
@@ -193,6 +195,14 @@ const handleClearQueue = () => {
                 background: rgba(var(--colorSuccess), 0.14);
             }
         }
+    }
+}
+
+.ui-console .download-queue-backdrop {
+    left: 400px;
+
+    & .download-queue {
+        width: 600px;
     }
 }
 </style>

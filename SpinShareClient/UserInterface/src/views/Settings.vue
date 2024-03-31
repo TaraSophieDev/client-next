@@ -5,11 +5,13 @@
                 <SpinButton
                     @click="openSettingsFolder"
                     icon="folder"
+                    v-if="!window.spinshare.settings.IsConsole"
                     v-tooltip="t('settings.openSettings')"
                 />
                 <SpinButton
                     icon="content-save"
                     :label="t('general.save')"
+                    v-if="!window.spinshare.settings.IsConsole"
                     :color="settingsDirty ? 'bright' : 'default'"
                     @click="handleSave"
                 />
@@ -160,11 +162,13 @@
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
 import SpinInput from '@/components/Common/SpinInput.vue';
-import { ref, inject, onMounted } from 'vue';
+import { ref, inject, onMounted, nextTick } from 'vue';
 import router from '@/router';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
+import { Buttons, focusableElements } from '@/modules/useGamepad';
+import ConsoleNavigation from '@/components/Console/ConsoleNavigation.vue';
 const { t } = useI18n();
 
 const settingLibraryPath = ref('');
@@ -178,7 +182,7 @@ const detectedDlcs = ref([]);
 const currentVersion = ref('0.0.0');
 const checkingForUpdates = ref(false);
 
-onMounted(() => {
+onMounted(async () => {
     window.external.sendMessage(
         JSON.stringify({
             command: 'settings-get-full',
@@ -192,6 +196,54 @@ onMounted(() => {
             data: '',
         }),
     );
+
+    if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.view-settings')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.Y,
+            label: t('settings.openSettings'),
+            onclick: () => {
+                openSettingsFolder();
+            },
+        });
+
+        controllerHintItems.push({
+            input: Buttons.X,
+            label: t('general.save'),
+            onclick: () => {
+                handleSave();
+            },
+        });
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
 });
 
 emitter.on('library-get-path-response', (path) => {

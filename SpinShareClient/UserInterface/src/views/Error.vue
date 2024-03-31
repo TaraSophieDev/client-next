@@ -13,7 +13,22 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 
 import { useI18n } from 'vue-i18n';
+import { onMounted, inject } from 'vue';
+const emitter = inject('emitter');
 const { t } = useI18n();
+
+onMounted(async () => {
+    if (window.spinshare.settings.IsConsole) {
+        // Controller Hints
+        let controllerHintItems = [];
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
+});
 </script>
 
 <style lang="scss" scoped>

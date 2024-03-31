@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick, inject } from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import ChartList from '@/components/Common/ChartList.vue';
 import {
@@ -67,6 +67,8 @@ import SpinButton from '@/components/Common/SpinButton.vue';
 import SpinTabBar from '@/components/Common/SpinTabBar.vue';
 
 import { useI18n } from 'vue-i18n';
+import { Buttons, focusableElements } from '@/modules/useGamepad';
+const emitter = inject('emitter');
 const { t } = useI18n();
 
 const getTabIndex = (tabName) => {
@@ -101,6 +103,38 @@ onMounted(async () => {
         charts.value = await getHotThisWeekCharts(currentPage.value);
     if (currentTab.value === 3)
         charts.value = await getHotThisMonthCharts(currentPage.value);
+
+    if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.view-discover-new')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
 });
 
 const handleTabChange = (tabIndex) => {
