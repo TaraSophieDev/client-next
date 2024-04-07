@@ -8,6 +8,8 @@
                 v-for="review in reviews"
                 :key="review.id"
                 v-bind="review"
+                :show-user="false"
+                :show-chart="true"
             />
         </div>
         <SpinLoader v-else />
