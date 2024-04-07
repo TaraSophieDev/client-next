@@ -132,6 +132,10 @@
     "settings": {
         "title": "Settings",
         "openSettings": "Open settings folder",
+        "updates": {
+            "label": "Software Updates",
+            "check": "Check for Updates"
+        },
         "gamePath": {
             "label": "Game path",
             "hint": "This is where your game installation is located",
@@ -158,9 +162,9 @@
             "detect": "Detect",
             "detectedDLCs": "Detected installed DLCs"
         },
-        "updates": {
-            "label": "Software Updates",
-            "check": "Check for Updates"
+        "consoleEnabled": {
+            "label": "Console UI",
+            "hint": "Gamepad friendly user interface (does not work on SteamDeck yet). Requires a full restart."
         },
         "thirdPartyLicenses": {
             "label": "Third Party licenses",

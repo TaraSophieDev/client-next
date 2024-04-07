@@ -17,6 +17,19 @@
                 />
             </SpinHeader>
             <SpinInput
+                :label="t('settings.updates.label')"
+                :hint="currentVersion"
+                type="horizontal"
+            >
+                <SpinButton
+                    icon="update"
+                    :label="t('settings.updates.check')"
+                    :loading="checkingForUpdates"
+                    :disabled="savingSettings || checkingForUpdates"
+                    @click="checkForUpdates"
+                />
+            </SpinInput>
+            <SpinInput
                 :label="t('settings.gamePath.label')"
                 type="path"
                 :hint="t('settings.gamePath.hint')"
@@ -75,6 +88,8 @@
                     >
                         <option value="en">English</option>
                         <option value="de">German</option>
+                        <option value="nl">Dutch</option>
+                        <option value="es">Spanish</option>
                         <option value="speen">Speen</option>
                     </select>
                     <span class="mdi mdi-chevron-down"></span>
@@ -120,29 +135,15 @@
                 v-if="detectedDlcs.length > 0 && !isDetectingDlcs"
             >
             </SpinInput>
-            <!--
             <SpinInput
-                label="Silent Queue"
-                hint="Disables the automatic reveal of the download sidebar when adding new charts to the queue"
+                :label="t('settings.consoleEnabled.label')"
+                :hint="t('settings.consoleEnabled.hint')"
                 type="horizontal"
             >
                 <SpinSwitch
-                    v-model="settingSilentQueue"
+                    v-model="settingConsoleEnabled"
                     @change="settingsDirty = true"
                     :disabled="savingSettings"
-                />
-            </SpinInput> -->
-            <SpinInput
-                :label="t('settings.updates.label')"
-                :hint="currentVersion"
-                type="horizontal"
-            >
-                <SpinButton
-                    icon="update"
-                    :label="t('settings.updates.check')"
-                    :loading="checkingForUpdates"
-                    :disabled="savingSettings || checkingForUpdates"
-                    @click="checkForUpdates"
                 />
             </SpinInput>
             <SpinInput
@@ -154,13 +155,6 @@
                     :label="t('settings.thirdPartyLicenses.seeLicenses')"
                     @click="openLicenses"
                 />
-            </SpinInput>
-            <SpinInput
-                label="Open Gamepad Tester"
-                hint="DEBUG"
-                type="horizontal"
-            >
-                <a href="https://gamepad-tester.com">OPEN</a>
             </SpinInput>
         </section>
     </AppLayout>
@@ -175,13 +169,13 @@ const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
 import { Buttons, focusableElements } from '@/modules/useGamepad';
-import ConsoleNavigation from '@/components/Console/ConsoleNavigation.vue';
 const { t } = useI18n();
 
 const settingLibraryPath = ref('');
 const settingGamePath = ref('');
 const settingLanguage = ref('en');
 const settingTheme = ref('dark');
+const settingConsoleEnabled = ref(false);
 const savingSettings = ref(false);
 const settingsDirty = ref(false);
 const isDetectingDlcs = ref(false);
@@ -384,6 +378,10 @@ const handleSave = () => {
                     key: 'app.theme',
                     value: settingTheme.value,
                 },
+                {
+                    key: 'app.console.enabled',
+                    value: settingConsoleEnabled.value,
+                },
             ],
         }),
     );
@@ -403,6 +401,7 @@ const setSettings = (settings) => {
     settingTheme.value = settings['app.theme'];
     settingLibraryPath.value = settings['library.path'];
     settingGamePath.value = settings['game.path'];
+    settingConsoleEnabled.value = settings['app.console.enabled'];
 
     emitter.emit('update-theme', settings['app.theme']);
 

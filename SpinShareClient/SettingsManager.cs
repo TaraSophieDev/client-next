@@ -249,8 +249,6 @@ public class SettingsManager
 
     public static bool GetIsSteamDeck()
     {
-        // TODO: Use settings
-        return false;
         return Environment.OSVersion.VersionString.Contains("SteamOS");
     }
 }
