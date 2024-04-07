@@ -39,6 +39,7 @@
                             v-if="item.State === STATE_QUEUED"
                             icon="trash-can-outline"
                             color="danger"
+                            @click="() => handleRemoveFromQueue(item.ID)"
                         />
                         <div
                             class="loading"
@@ -124,6 +125,15 @@ const handleClearQueue = () => {
         }),
     );
 };
+
+const handleRemoveFromQueue = (queueId) => {
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'queue-remove',
+            data: queueId,
+        }),
+    );
+};
 </script>
 
 <style lang="scss">
@@ -189,7 +199,7 @@ const handleClearQueue = () => {
             }
 
             &.state-0 {
-                opacity: 0.3;
+                opacity: 0.6;
             }
             &.state-5 {
                 background: rgba(var(--colorSuccess), 0.14);

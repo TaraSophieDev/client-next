@@ -56,6 +56,8 @@ public class CommandFactory
                 return new CommandQueueGetCount(serviceProvider);
             case "queue-get":
                 return new CommandQueueGet(serviceProvider);
+            case "queue-remove":
+                return new CommandQueueRemove(serviceProvider);
             case "queue-clear":
                 return new CommandQueueClear(serviceProvider);
             case "settings-open-in-explorer":
