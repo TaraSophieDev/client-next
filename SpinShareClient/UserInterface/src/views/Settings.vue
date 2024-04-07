@@ -155,6 +155,13 @@
                     @click="openLicenses"
                 />
             </SpinInput>
+            <SpinInput
+                label="Open Gamepad Tester"
+                hint="DEBUG"
+                type="horizontal"
+            >
+                <a href="https://gamepad-tester.com">OPEN</a>
+            </SpinInput>
         </section>
     </AppLayout>
 </template>
