@@ -180,7 +180,9 @@
                 "update": "Update",
                 "play": "Play",
                 "queued": "Queued",
-                "downloading": "Downloading"
+                "downloading": "Downloading",
+                "playPreview": "Play preview",
+                "stopPreview": "Stop preview"
             },
             "tabBar": {
                 "overview": "Overview",

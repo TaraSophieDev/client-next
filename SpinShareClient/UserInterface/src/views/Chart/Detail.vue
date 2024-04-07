@@ -102,6 +102,18 @@
                             />
                         </template>
                         <SpinButton
+                            icon="play"
+                            v-tooltip="t('chart.detail.actions.playPreview')"
+                            @click="handlePreviewPlay"
+                            v-if="previewPlayer === null"
+                        />
+                        <SpinButton
+                            icon="stop"
+                            v-tooltip="t('chart.detail.actions.stopPreview')"
+                            @click="handlePreviewStop"
+                            v-if="previewPlayer !== null"
+                        />
+                        <SpinButton
                             icon="open-in-new"
                             v-tooltip="t('general.openOnSpinShare')"
                             @click="handleOpenInBrowser"
@@ -173,6 +185,7 @@ import TabPlaylists from '@/components/Chart/Detail/TabPlaylists.vue';
 import { Buttons, focusableElements } from '@/modules/useGamepad';
 
 const route = useRoute();
+const previewPlayer = ref(null);
 const chart = ref(null);
 const libraryState = ref(null);
 const queueState = ref(null);
@@ -291,6 +304,30 @@ const handleRemove = () => {
             data: chart.value.fileReference,
         }),
     );
+};
+
+const handlePreviewPlay = () => {
+    previewPlayer.value = new Audio(chart.value.paths.ogg);
+    previewPlayer.value.volume = 0.5;
+    previewPlayer.value.play();
+    let playTimeout = setTimeout(handlePreviewStop, 20 * 1000);
+    previewPlayer.value.onended = () => {
+        clearTimeout(playTimeout);
+        previewPlayer.value = null;
+    };
+};
+const handlePreviewStop = () => {
+    let fadeEffect = setInterval(function () {
+        if (previewPlayer.value.volume > 0) {
+            previewPlayer.value.volume -= 0.05;
+        }
+        if (previewPlayer.value.volume <= 0.05) {
+            clearInterval(fadeEffect);
+            previewPlayer.value.pause();
+            previewPlayer.value.currentTime = 0;
+            previewPlayer.value = null;
+        }
+    }, 50);
 };
 
 const currentTab = ref(0);
