@@ -2,9 +2,11 @@
     <button tabindex="-1">
         <div
             class="input"
-            :class="{ long: inputLabel.length > 1 }"
         >
-            {{ inputLabel }}
+            <img
+                :src="inputImage"
+                alt="Input"
+            />
         </div>
         <div class="label">
             {{ actionLabel }}
@@ -13,22 +15,27 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
     actionLabel: {
         type: String,
         default: 'Unknown',
     },
     inputLabel: {
         type: String,
-        default: 'A',
+        default: 'a',
     },
 });
+
+const inputImage = new URL(
+    `../../../assets/inputs/button_${props.inputLabel}.svg`,
+    import.meta.url,
+).href;
 </script>
 
 <style lang="scss" scoped>
 button {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
     background: none;
     border: none;
@@ -36,31 +43,25 @@ button {
     color: #fff;
     font-family: 'Work Sans', sans-serif;
     border-radius: 10px;
-    padding: 8px;
+    padding: 4px 8px;
     transition: 0.1s ease-in-out all;
     text-transform: uppercase;
 
     & .input {
-        height: 32px;
-        min-width: 32px;
-        background: #fff;
-        color: #000;
+        height: 36px;
+        min-width: 36px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 100px;
-        font-size: 1rem;
-        font-weight: bold;
-        line-height: 1rem;
 
-        &.long {
-            padding: 0 15px;
+        & img {
+            max-height: 36px;
         }
     }
     & .label {
-        font-size: 1rem;
-        font-weight: 400;
-        letter-spacing: 0.05rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        letter-spacing: 0.025rem;
     }
 
     &:hover {

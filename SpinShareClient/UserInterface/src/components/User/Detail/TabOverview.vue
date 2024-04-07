@@ -85,6 +85,15 @@ const parseDescription = (description) => {
     }
 }
 
+.ui-console .user-detail-tab-overview {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+
+    & .card {
+        border-width: 2px;
+    }
+}
+
 @media screen and (max-width: 1200px) {
     .user-detail-tab-overview {
         grid-template-columns: 1fr 1fr;

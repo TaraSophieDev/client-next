@@ -3,7 +3,7 @@
         class="chart-item"
         :class="isSpinShare ? 'is-spinshare' : 'is-local'"
         @click="handleClick"
-        tabindex="0"
+        :tabindex="isSpinShare ? 0 : -1"
     >
         <div
             class="cover"

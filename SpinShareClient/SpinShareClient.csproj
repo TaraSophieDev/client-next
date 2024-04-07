@@ -13,8 +13,6 @@
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 		<ApplicationIcon>../publish/templates/win/app.ico</ApplicationIcon>
-		<SelfContained>true</SelfContained>
-		<PublishSingleFile>true</PublishSingleFile>
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 		<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
 		<EnableDefaultContent>false</EnableDefaultContent>

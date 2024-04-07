@@ -2,6 +2,8 @@
     <div
         class="spinplay-item"
         @click="handleClick"
+        @keydown.enter="handleClick"
+        tabindex="0"
     >
         <div
             class="thumbnail"
@@ -151,6 +153,13 @@ const handleClick = () => {
     &:hover {
         background: rgba(var(--colorBaseText), 0.14);
         cursor: pointer;
+    }
+}
+
+.ui-console .spinplay-item {
+    &:focus {
+        background: rgba(var(--colorBaseText), 0.14);
+        outline: 3px solid silver;
     }
 }
 </style>

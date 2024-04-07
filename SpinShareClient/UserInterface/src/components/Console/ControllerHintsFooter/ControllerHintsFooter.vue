@@ -3,7 +3,7 @@
         <main>
             <ControllerHint
                 v-if="showMenu"
-                inputLabel="+"
+                inputLabel="start_icon"
                 actionLabel="MENU"
                 @click="toggleMenu"
             />
