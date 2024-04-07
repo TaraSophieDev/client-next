@@ -4,7 +4,7 @@
     "save": "Speen",
     "close": "Speen",
     "download": "Speen",
-    "select": "",
+    "select": "Speen",
     "back": "Speen",
     "continue": "Speen",
     "cancel": "Speen",
@@ -163,8 +163,8 @@
       "detectedDLCs": "Speen speen"
     },
     "consoleEnabled": {
-      "label": "",
-      "hint": ""
+      "label": "Speen speen",
+      "hint": "Speen speen speen speen (speen speen speen speen speen). Speen speen speen."
     },
     "thirdPartyLicenses": {
       "label": "Speen speen Speen",
@@ -185,8 +185,8 @@
         "play": "Speen",
         "queued": "Speen",
         "downloading": "Speen",
-        "playPreview": "",
-        "stopPreview": ""
+        "playPreview": "Speen speen",
+        "stopPreview": "Speen speen"
       },
       "tabBar": {
         "overview": "Speen",
