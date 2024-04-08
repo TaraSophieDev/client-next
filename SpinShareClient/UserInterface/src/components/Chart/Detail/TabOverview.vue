@@ -50,14 +50,20 @@
                     {{ t('chart.detail.overview.explicit.label') }}
                 </div>
             </div>
-            <div class="item">
+            <div
+                class="item"
+                v-tooltip="absoluteUploadDate"
+            >
                 <span class="mdi mdi-calendar-clock-outline"></span>
                 <div class="value">{{ relativeUploadDate }}</div>
                 <div class="label">
                     {{ t('chart.detail.overview.uploaded.label') }}
                 </div>
             </div>
-            <div class="item">
+            <div
+                class="item"
+                v-tooltip="absoluteUpdateDate"
+            >
                 <span class="mdi mdi-update"></span>
                 <div class="value">{{ relativeUpdateDate }}</div>
                 <div class="label">
@@ -121,8 +127,14 @@ const props = defineProps({
 
 const uploaderUser = ref(null);
 
+const absoluteUploadDate = computed(() =>
+    moment(props.uploadDate.date).format('L'),
+);
 const relativeUploadDate = computed(() =>
     moment(props.uploadDate.date).startOf('minute').fromNow(),
+);
+const absoluteUpdateDate = computed(() =>
+    props.updateDate ? moment(props.updateDate?.date).format('L') : 'Never',
 );
 const relativeUpdateDate = computed(() =>
     props.updateDate
