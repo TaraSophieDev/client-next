@@ -112,4 +112,16 @@ const canSearch = computed(() => {
         }
     }
 }
+.ui-console {
+    & .search-bar {
+        & input[type='search'] {
+            padding: 0 20px;
+            height: 55px;
+
+            &:focus {
+                outline: 3px solid rgba(var(--colorBaseText), 1);
+            }
+        }
+    }
+}
 </style>

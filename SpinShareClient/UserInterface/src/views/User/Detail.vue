@@ -249,4 +249,16 @@ const handleTabChange = (i) => {
         }
     }
 }
+.ui-console {
+    & .view-user-detail {
+        & header {
+            gap: 30px;
+
+            & img {
+                width: 128px;
+                height: 128px;
+            }
+        }
+    }
+}
 </style>

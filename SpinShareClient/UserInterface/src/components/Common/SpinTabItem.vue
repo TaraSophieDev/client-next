@@ -1,6 +1,7 @@
 <template>
     <div
         @click="emit('click')"
+        @keyup.enter="emit('click')"
         class="spin-tab-item"
         :class="{ active: active }"
         tabindex="0"
@@ -56,25 +57,25 @@ defineProps({
 }
 
 .ui-console .spin-tab-item {
-  padding: 12px 25px;
-  border-radius: 100px;
-  font-weight: bold;
-  text-transform: uppercase;
+    padding: 12px 25px;
+    border-radius: 100px;
+    font-weight: bold;
+    text-transform: uppercase;
 
-  &::after {
-    all: unset;
-  }
+    &::after {
+        all: unset;
+    }
 
-  &:hover {
-    background: rgba(var(--colorBaseText), 0.07);
-  }
-  &.active {
-    background: #fff;
-    color: #000;
-  }
-  &:focus {
-    background: #fff;
-    color: #000;
-  }
+    &:hover {
+        background: rgba(var(--colorBaseText), 0.07);
+    }
+    &.active {
+        background: rgba(var(--colorBaseText), 1);
+        color: rgba(var(--colorBase), 1);
+    }
+
+    &:focus {
+        outline: 3px solid rgba(var(--colorBaseText), 1);
+    }
 }
 </style>

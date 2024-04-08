@@ -1,7 +1,9 @@
 <template>
     <div
         class="playlist-item"
-        @click.left="handleClick"
+        tabindex="0"
+        @click="handleClick"
+        @keyup.enter="handleClick"
     >
         <div
             class="cover"
@@ -134,6 +136,13 @@ const handleClick = () => {
         background: rgba(var(--colorBaseText), 0.14);
         cursor: pointer;
         opacity: 0.4;
+    }
+}
+.ui-console {
+    & .playlist-item {
+        &:focus {
+            outline: 3px solid rgba(var(--colorBaseText), 1);
+        }
     }
 }
 </style>

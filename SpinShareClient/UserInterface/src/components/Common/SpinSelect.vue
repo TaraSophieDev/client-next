@@ -1,14 +1,15 @@
 <template>
     <div
         ref="DOMDropdown"
-        @focusout="closeDropdown"
-        tabindex="0"
+        @focusout="focusoutDropdown"
         class="spin-select"
         :class="`${disabled ? 'disabled' : ''}`"
     >
         <div
             @click="toggleDropdown"
+            @keyup.enter="toggleDropdown"
             class="button"
+            tabindex="0"
         >
             <span
                 :class="`mdi mdi-${
@@ -31,6 +32,8 @@
                     v-for="option in options"
                     :key="option.value"
                     @click="selectOption(option.value)"
+                    @keyup.enter="selectOption(option.value)"
+                    :tabindex="showDropdown ? 0 : -1"
                     :class="`option ${
                         modelValue === option.value ? 'selected' : ''
                     }`"
@@ -77,6 +80,12 @@ const selectOption = (value) => {
 
 const closeDropdown = () => {
     showDropdown.value = false;
+};
+
+const focusoutDropdown = (event) => {
+    if (!DOMDropdown.value?.contains(event.relatedTarget)) {
+        closeDropdown();
+    }
 };
 </script>
 
@@ -128,7 +137,6 @@ const closeDropdown = () => {
         z-index: 1;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
-        overflow: hidden;
 
         & .option {
             cursor: pointer;
@@ -171,6 +179,31 @@ const closeDropdown = () => {
             &:hover {
                 cursor: pointer;
                 background: rgba(var(--colorBaseText), 0.14);
+            }
+        }
+    }
+}
+
+.ui-console {
+    & .spin-select {
+        min-width: 225px;
+
+        & .button {
+            padding: 0 20px;
+            height: 55px;
+
+            &:focus {
+                outline: 3px solid rgba(var(--colorBaseText), 1);
+            }
+        }
+        & .options {
+            & .option {
+                padding: 0 20px;
+                height: 55px;
+
+                &:focus {
+                    outline: 3px solid rgba(var(--colorBaseText), 1);
+                }
             }
         }
     }

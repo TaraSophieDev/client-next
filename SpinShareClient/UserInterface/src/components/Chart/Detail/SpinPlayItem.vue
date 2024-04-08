@@ -159,7 +159,7 @@ const handleClick = () => {
 .ui-console .spinplay-item {
     &:focus {
         background: rgba(var(--colorBaseText), 0.14);
-        outline: 3px solid silver;
+        outline: 3px solid rgba(var(--colorBaseText), 1);
     }
 }
 </style>

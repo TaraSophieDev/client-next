@@ -163,7 +163,7 @@ button {
     font-size: 24px;
   }
   &:focus {
-    outline: 3px solid silver;
+    outline: 3px solid rgba(var(--colorBaseText), 1);
   }
 }
 </style>

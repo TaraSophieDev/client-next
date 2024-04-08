@@ -1,7 +1,8 @@
 <template>
     <div
         class="user-item"
-        @click.left="handleClick"
+        @click="handleClick"
+        @keyup.enter="handleClick"
         tabindex="0"
     >
         <img
@@ -147,16 +148,18 @@ const handleClick = () => {
 }
 
 .ui-console .user-item {
-  & img {
-    width: 64px;
-    height: 64px;
-  }
-  & .meta {
-    gap: 6px;
-  }
+    padding: 10px 20px;
 
-  &:focus {
-    outline: 3px solid silver;
-  }
+    & img {
+        width: 64px;
+        height: 64px;
+    }
+    & .meta {
+        gap: 6px;
+    }
+
+    &:focus {
+        outline: 3px solid rgba(var(--colorBaseText), 1);
+    }
 }
 </style>
