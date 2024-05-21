@@ -14,9 +14,9 @@ import { inject, onMounted } from 'vue';
 const emitter = inject('emitter');
 
 onMounted(() => {
-  if (window.spinshare.settings.IsConsole) {
-        document.body.classList.add("ui-console");
-    
+    if (window.spinshare.settings.IsConsole) {
+        document.body.classList.add('ui-console');
+
         emitter.emit('console-update-controller-hints', {
             showMenu: false,
             items: [],
@@ -31,7 +31,7 @@ onMounted(() => {
     height: 100%;
     display: grid;
     overflow: hidden;
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: auto 1fr;
 
     & > main {
         overflow-y: auto;
@@ -39,6 +39,6 @@ onMounted(() => {
 }
 
 .ui-console .layout-app {
-   grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
 }
 </style>

@@ -1,7 +1,16 @@
 <template>
     <aside>
         <div class="brand">
-            <img src="../assets/icon.svg" />
+            <img
+                src="../assets/icon.svg"
+                class="icon"
+                alt="SpinShare Logo"
+            />
+            <img
+                src="../assets/logo.svg"
+                class="logo"
+                alt="SpinShare Logo"
+            />
         </div>
 
         <nav>
@@ -11,6 +20,7 @@
                 v-tooltip.right="t('general.sidebar.frontpage')"
             >
                 <span class="mdi mdi-view-dashboard-outline"></span>
+                <span class="label">{{ t('general.sidebar.frontpage') }}</span>
             </router-link>
             <router-link
                 to="/search"
@@ -18,6 +28,7 @@
                 v-tooltip.right="t('general.sidebar.search')"
             >
                 <span class="mdi mdi-magnify"></span>
+                <span class="label">{{ t('general.sidebar.search') }}</span>
             </router-link>
             <router-link
                 to="/discover/new/0"
@@ -25,6 +36,7 @@
                 v-tooltip.right="t('general.sidebar.new')"
             >
                 <span class="mdi mdi-new-box"></span>
+                <span class="label">{{ t('general.sidebar.new') }}</span>
             </router-link>
             <router-link
                 to="/discover/updated/0"
@@ -32,6 +44,7 @@
                 v-tooltip.right="t('general.sidebar.updated')"
             >
                 <span class="mdi mdi-update"></span>
+                <span class="label">{{ t('general.sidebar.updated') }}</span>
             </router-link>
             <router-link
                 to="/discover/hotThisWeek/0"
@@ -39,6 +52,7 @@
                 v-tooltip.right="t('general.sidebar.trending')"
             >
                 <span class="mdi mdi-fire"></span>
+                <span class="label">{{ t('general.sidebar.trending') }}</span>
             </router-link>
         </nav>
 
@@ -49,6 +63,7 @@
                 v-tooltip.right="t('general.sidebar.library')"
             >
                 <span class="mdi mdi-archive-music-outline"></span>
+                <span class="label">{{ t('general.sidebar.library') }}</span>
             </router-link>
             <div
                 class="item"
@@ -57,6 +72,7 @@
                 @click="toggleDownloadQueue"
             >
                 <span class="mdi mdi-download-box-outline"></span>
+                <span class="label">{{ t('general.sidebar.downloads') }}</span>
                 <div
                     class="badge"
                     v-if="downloadQueueCount !== 0"
@@ -70,6 +86,7 @@
                 v-tooltip.right="t('general.sidebar.settings')"
             >
                 <span class="mdi mdi-cog-outline"></span>
+                <span class="label">{{ t('general.sidebar.settings') }}</span>
             </router-link>
         </nav>
 
@@ -119,19 +136,44 @@ aside {
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-gap: 15px;
-    justify-content: center;
     align-items: center;
-    padding: 25px 0;
+    padding: 25px;
+    width: 300px;
+
+    @media (max-width: 1200px) {
+        justify-content: center;
+        padding: 25px 0;
+        width: 60px;
+    }
 
     & .brand {
-        width: 42px;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+
+        @media (max-width: 1200px) {
+            width: 42px;
+        }
 
         & img {
-            width: 24px;
-            height: 24px;
+            &.icon {
+                width: 24px;
+                height: 24px;
+                display: none;
+
+                @media (max-width: 1200px) {
+                    display: block;
+                }
+            }
+
+            &.logo {
+                height: 24px;
+                display: block;
+
+                @media (max-width: 1200px) {
+                    display: none;
+                }
+            }
         }
     }
 
@@ -139,19 +181,22 @@ aside {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        align-items: center;
+
+        @media (max-width: 1200px) {
+            align-items: center;
+        }
 
         & .item {
-            width: 42px;
-            height: 42px;
             display: flex;
             border-radius: 100px;
-            justify-content: center;
             align-items: center;
+            gap: 15px;
+            text-decoration: none;
             transition: 0.15s ease-in-out all;
             position: relative;
+            padding: 10px 20px;
 
-            & > span {
+            & .mdi {
                 font-size: 22px;
             }
 
@@ -176,6 +221,17 @@ aside {
             &:not(.router-link-exact-active):not(.active):hover {
                 background: rgba(var(--colorBaseText), 0.07);
                 cursor: pointer;
+            }
+
+            @media (max-width: 1200px) {
+                width: 42px;
+                height: 42px;
+                padding: 0;
+                justify-content: center;
+
+                & .label {
+                    display: none;
+                }
             }
         }
     }

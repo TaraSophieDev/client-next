@@ -139,7 +139,7 @@ const handleRemoveFromQueue = (queueId) => {
 <style lang="scss">
 .download-queue-backdrop {
     position: absolute;
-    left: 60px;
+    left: 300px;
     bottom: 0;
     top: 0;
     right: 0;
@@ -147,6 +147,10 @@ const handleRemoveFromQueue = (queueId) => {
     backdrop-filter: blur(5px);
     z-index: 100;
     cursor: pointer;
+
+    @media (max-width: 1200px) {
+        left: 60px;
+    }
 
     & .download-queue {
         cursor: default;
