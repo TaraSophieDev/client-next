@@ -127,6 +127,7 @@ public class Program
                     Language = settingsManager.Get<string>("app.language", "en"),
                     Theme = settingsManager.Get<string>("app.theme", "dark"),
                     IsConsole = settingsManager.Get<bool>("app.console.enabled", SettingsManager.GetIsSteamDeck()),
+                    AlwaysShowExplicit = settingsManager.Get<bool>("app.explicit.alwaysShow", false),
                 };
 
                 var settingsJson = JsonConvert.SerializeObject(settings);

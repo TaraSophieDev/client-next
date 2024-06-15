@@ -147,6 +147,17 @@
                 />
             </SpinInput>
             <SpinInput
+                :label="t('settings.alwaysShowExplicit.label')"
+                :hint="t('settings.alwaysShowExplicit.hint')"
+                type="horizontal"
+            >
+                <SpinSwitch
+                    v-model="settingAlwaysShowExplicit"
+                    @change="settingsDirty = true"
+                    :disabled="savingSettings"
+                />
+            </SpinInput>
+            <SpinInput
                 :label="t('settings.thirdPartyLicenses.label')"
                 :hint="t('settings.thirdPartyLicenses.hint')"
                 type="horizontal"
@@ -176,6 +187,7 @@ const settingGamePath = ref('');
 const settingLanguage = ref('en');
 const settingTheme = ref('dark');
 const settingConsoleEnabled = ref(false);
+const settingAlwaysShowExplicit = ref(false);
 const savingSettings = ref(false);
 const settingsDirty = ref(false);
 const isDetectingDlcs = ref(false);
@@ -382,6 +394,10 @@ const handleSave = () => {
                     key: 'app.console.enabled',
                     value: settingConsoleEnabled.value,
                 },
+                {
+                    key: 'app.explicit.alwaysShow',
+                    value: settingAlwaysShowExplicit.value,
+                },
             ],
         }),
     );
@@ -402,6 +418,7 @@ const setSettings = (settings) => {
     settingLibraryPath.value = settings['library.path'];
     settingGamePath.value = settings['game.path'];
     settingConsoleEnabled.value = settings['app.console.enabled'];
+    settingAlwaysShowExplicit.value = settings['app.explicit.alwaysShow'];
 
     emitter.emit('update-theme', settings['app.theme']);
 

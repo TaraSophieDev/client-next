@@ -1,7 +1,10 @@
 <template>
     <div
         class="chart-item"
-        :class="{ explicit: isExplicit }"
+        :class="{
+            explicit:
+                isExplicit && !window.spinshare.settings.AlwaysShowExplicit,
+        }"
         @click.left="handleClick"
         @keydown.enter="handleClick"
         @click.middle="handleAddToQueue"
