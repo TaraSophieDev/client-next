@@ -87,9 +87,16 @@ public class LibraryCache
         {
             Stopwatch itemWatch = new Stopwatch();
             itemWatch.Start();
-            
-            await AddToCache(filePaths[i]);
-        
+
+            try
+            {
+                await AddToCache(filePaths[i]);
+            }
+            catch (Exception ex)
+            {
+                SentrySdk.CaptureException(ex);
+            }
+
             itemWatch.Stop();
             _logger.LogInformation("Finished {I} of {FilePathsLength} (in {ItemWatchElapsed})", i + 1, filePaths.Length, itemWatch.Elapsed);
             
