@@ -1,17 +1,26 @@
 <template>
     <aside>
-        <div class="brand">
-            <img
-                src="../assets/icon.svg"
-                class="icon"
-                alt="SpinShare Logo"
-            />
-            <img
-                src="../assets/logo.svg"
-                class="logo"
-                alt="SpinShare Logo"
-            />
-        </div>
+        <nav class="header">
+            <button
+                class="item backButton"
+                @click="handleBack"
+                v-if="canGoBack"
+            >
+                <span class="mdi mdi-arrow-left"></span>
+            </button>
+            <div class="brand">
+                <img
+                    src="../assets/icon.svg"
+                    class="icon"
+                    alt="SpinShare Logo"
+                />
+                <img
+                    src="../assets/logo.svg"
+                    class="logo"
+                    alt="SpinShare Logo"
+                />
+            </div>
+        </nav>
 
         <nav>
             <router-link
@@ -65,7 +74,7 @@
                 <span class="mdi mdi-archive-music-outline"></span>
                 <span class="label">{{ t('general.sidebar.library') }}</span>
             </router-link>
-            <div
+            <button
                 class="item"
                 :class="{ active: downloadQueueActive }"
                 v-tooltip.right="t('general.sidebar.downloads')"
@@ -79,7 +88,7 @@
                 >
                     {{ downloadQueueCount }}
                 </div>
-            </div>
+            </button>
             <router-link
                 to="/settings"
                 class="item"
@@ -101,11 +110,12 @@
 </template>
 
 <script setup>
-import { ref, inject, onMounted } from 'vue';
+import { ref, inject, onMounted, computed } from 'vue';
 import DownloadQueue from '@/components/DownloadQueue.vue';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
+import router from '@/router';
 const { t } = useI18n();
 
 const downloadQueueCount = ref(0);
@@ -127,6 +137,12 @@ onMounted(() => {
 const toggleDownloadQueue = () => {
     emitter.emit('download-queue-toggle');
 };
+
+const handleBack = () => {
+    router.go(-1);
+};
+
+const canGoBack = computed(() => window.history.state.back !== null);
 </script>
 
 <style lang="scss" scoped>
@@ -146,10 +162,28 @@ aside {
         width: 60px;
     }
 
+    & .header {
+        min-height: 45px;
+        display: grid;
+        gap: 15px;
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-areas: 'backButton logo empty';
+
+        & .backButton {
+            grid-area: backButton;
+        }
+
+        @media (max-width: 1200px) {
+            grid-template-columns: auto;
+            grid-template-areas: 'backButton' 'logo';
+        }
+    }
+
     & .brand {
         display: flex;
         align-items: center;
         justify-content: center;
+        grid-area: logo;
 
         @media (max-width: 1200px) {
             width: 42px;
@@ -195,6 +229,11 @@ aside {
             transition: 0.15s ease-in-out all;
             position: relative;
             padding: 10px 20px;
+            font-size: 1rem;
+            font-family: var(--fontFamily);
+            background: transparent;
+            border: 0;
+            color: rgb(var(--colorBaseText));
 
             & .mdi {
                 font-size: 22px;
@@ -233,6 +272,17 @@ aside {
                     display: none;
                 }
             }
+        }
+    }
+}
+
+.ui-console aside {
+    & .header {
+        grid-template-columns: auto;
+        grid-template-areas: 'logo';
+
+        & .backButton {
+            display: none;
         }
     }
 }
