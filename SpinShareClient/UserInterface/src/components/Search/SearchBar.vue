@@ -92,6 +92,7 @@ const canSearch = computed(() => {
     border-bottom: 1px solid rgba(var(--colorBaseText), 0.07);
 
     & input[type='search'] {
+        appearance: none;
         flex-grow: 1;
         background: rgba(var(--colorBaseText), 0.07);
         border: 0;
