@@ -90,6 +90,7 @@
                         <option value="de">German</option>
                         <option value="nl">Dutch</option>
                         <option value="es">Spanish</option>
+                        <option value="fr">French</option>
                         <option value="speen">Speen</option>
                     </select>
                     <span class="mdi mdi-chevron-down"></span>
