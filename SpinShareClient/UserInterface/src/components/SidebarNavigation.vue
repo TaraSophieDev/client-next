@@ -9,16 +9,8 @@
                 <span class="mdi mdi-arrow-left"></span>
             </button>
             <div class="brand">
-                <img
-                    src="../assets/icon.svg"
-                    class="icon"
-                    alt="SpinShare Logo"
-                />
-                <img
-                    src="../assets/logo.svg"
-                    class="logo"
-                    alt="SpinShare Logo"
-                />
+                <SpinShareIcon class="icon" />
+                <SpinShareLogo class="logo" />
             </div>
         </nav>
 
@@ -112,6 +104,8 @@
 <script setup>
 import { ref, inject, onMounted, computed } from 'vue';
 import DownloadQueue from '@/components/DownloadQueue.vue';
+import SpinShareIcon from '@/assets/icon.svg?component';
+import SpinShareLogo from '@/assets/logo.svg?component';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
@@ -168,9 +162,15 @@ aside {
         gap: 15px;
         grid-template-columns: 1fr auto 1fr;
         grid-template-areas: 'backButton logo empty';
+        align-items: center;
+        justify-content: center;
 
         & .backButton {
             grid-area: backButton;
+            padding: 0;
+            width: 42px;
+            height: 42px;
+            justify-content: center;
         }
 
         @media (max-width: 1200px) {
@@ -185,28 +185,22 @@ aside {
         justify-content: center;
         grid-area: logo;
 
-        @media (max-width: 1200px) {
-            width: 42px;
+        & .icon {
+            width: 24px;
+            height: 24px;
+            display: none;
+
+            @media (max-width: 1200px) {
+                display: block;
+            }
         }
 
-        & img {
-            &.icon {
-                width: 24px;
-                height: 24px;
+        & .logo {
+            height: 24px;
+            display: block;
+
+            @media (max-width: 1200px) {
                 display: none;
-
-                @media (max-width: 1200px) {
-                    display: block;
-                }
-            }
-
-            &.logo {
-                height: 24px;
-                display: block;
-
-                @media (max-width: 1200px) {
-                    display: none;
-                }
             }
         }
     }
