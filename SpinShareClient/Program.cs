@@ -57,7 +57,7 @@ public class Program
         }
         
         PhotinoServer
-            .CreateStaticFileServer(args, out string baseUrl)
+            .CreateStaticFileServer(args, 9000, 100, "wwwroot", out string baseUrl)
             .RunAsync();
 
         var messageHandler = new MessageHandler();
