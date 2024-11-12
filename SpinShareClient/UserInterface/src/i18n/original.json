@@ -11,6 +11,8 @@
     "apply": "Apply",
     "addToQueue": "Add to Queue",
     "openOnSpinShare": "Open on SpinSha.re",
+    "copyLink": "Copy link",
+    "copyId": "Copy Id",
     "report": "Report",
     "loading": "Loading",
     "pagination": {
@@ -165,6 +167,10 @@
     "consoleEnabled": {
       "label": "Console UI",
       "hint": "Gamepad friendly user interface (does not work on SteamDeck yet). Requires a full restart."
+    },
+    "alwaysShowExplicit": {
+      "label": "Always show explicit",
+      "hint": "Never blurs the cover art and metadata of explicit charts. Requires a full restart."
     },
     "thirdPartyLicenses": {
       "label": "Third Party licenses",

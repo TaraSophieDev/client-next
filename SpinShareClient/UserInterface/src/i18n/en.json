@@ -11,6 +11,8 @@
     "apply": "Apply",
     "addToQueue": "Add to Queue",
     "openOnSpinShare": "Open on SpinSha.re",
+    "copyLink": "Copy link",
+    "copyId": "Copy Id",
     "report": "Report",
     "loading": "Loading",
     "pagination": {
