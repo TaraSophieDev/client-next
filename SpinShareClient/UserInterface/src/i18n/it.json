@@ -11,6 +11,8 @@
     "apply": "Applica",
     "addToQueue": "Aggiungi in coda",
     "openOnSpinShare": "Apri su SpinSha.re",
+    "copyLink": "",
+    "copyId": "",
     "report": "Segnala",
     "loading": "Caricamento",
     "pagination": {
@@ -166,6 +168,10 @@
       "label": "",
       "hint": ""
     },
+    "alwaysShowExplicit": {
+      "label": "",
+      "hint": ""
+    },
     "thirdPartyLicenses": {
       "label": "Licenze di terze parti",
       "hint": "Questo progetto è stato creato con librerie di terze parti.",
@@ -212,6 +218,15 @@
         "lastUpdate": {
           "label": "Ultimo aggiornamento"
         }
+      },
+      "reviews": {
+        "noContent": ""
+      },
+      "spinPlays": {
+        "noContent": ""
+      },
+      "playlists": {
+        "noContent": ""
       }
     }
   },

@@ -11,6 +11,8 @@
     "apply": "Appliquer",
     "addToQueue": "Ajouter à la file d'attente",
     "openOnSpinShare": "Ouvrir sur SpinSha.re",
+    "copyLink": "",
+    "copyId": "",
     "report": "Signaler",
     "loading": "En cours de chargement",
     "pagination": {
@@ -166,6 +168,10 @@
       "label": "Interface de la console",
       "hint": "Interface Gamepad (ne fonctionne pas encore sur Steam Deck). Nécessite un redémarrage complet."
     },
+    "alwaysShowExplicit": {
+      "label": "",
+      "hint": ""
+    },
     "thirdPartyLicenses": {
       "label": "Licences tierces",
       "hint": "Ce projet a été créé avec des bibliothèques tierces.",
@@ -212,6 +218,15 @@
         "lastUpdate": {
           "label": "Dernière mise à jour"
         }
+      },
+      "reviews": {
+        "noContent": ""
+      },
+      "spinPlays": {
+        "noContent": ""
+      },
+      "playlists": {
+        "noContent": ""
       }
     }
   },
