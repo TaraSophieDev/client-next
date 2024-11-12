@@ -212,6 +212,15 @@
         "lastUpdate": {
           "label": "Speen speen"
         }
+      },
+      "reviews": {
+        "noContent": "Speen speen speen speen speen speen."
+      },
+      "spinPlays": {
+        "noContent": "Speen speen speen speen speen speen."
+      },
+      "playlists": {
+        "noContent": "Speen speen speen speen speen speen."
       }
     }
   },

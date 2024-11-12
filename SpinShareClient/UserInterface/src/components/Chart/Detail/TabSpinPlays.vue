@@ -1,5 +1,9 @@
 <template>
     <section class="chart-detail-tab-spinplays">
+        <NoContent
+            v-if="!spinplays || !spinplays.spinPlays"
+            :text="t('chart.detail.spinPlays.noContent')"
+        />
         <div
             class="spinplays-list"
             v-if="spinplays"
@@ -18,6 +22,9 @@
 import { ref, onMounted } from 'vue';
 import { getChartSpinPlays } from '@/api/api';
 import SpinPlayItem from '@/components/Chart/Detail/SpinPlayItem.vue';
+import NoContent from '../../Common/NoContent.vue';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const props = defineProps({
     id: {

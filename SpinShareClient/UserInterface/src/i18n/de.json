@@ -216,6 +216,15 @@
         "lastUpdate": {
           "label": "Letztes Update"
         }
+      },
+      "reviews": {
+        "noContent": "Diese Chart hat noch keine Reviews."
+      },
+      "spinPlays": {
+        "noContent": "Diese Chart hat noch keine SpinPlays."
+      },
+      "playlists": {
+        "noContent": "Diese Chart ist noch in keiner Playlist."
       }
     }
   },

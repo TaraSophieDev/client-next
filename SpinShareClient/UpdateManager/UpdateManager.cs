@@ -49,7 +49,6 @@ public class UpdateManager
 
     public async Task<List<GithubRelease>> LoadReleases()
     {
-        // TODO: Change Owner/Repo
         try
         {
             var client = new HttpClient();

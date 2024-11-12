@@ -216,6 +216,15 @@
         "lastUpdate": {
           "label": "Last update"
         }
+      },
+      "reviews": {
+        "noContent": "This chart does not have any reviews yet."
+      },
+      "spinPlays": {
+        "noContent": "This chart does not have any SpinPlays yet."
+      },
+      "playlists": {
+        "noContent": "This chart was not added to any playlist yet."
       }
     }
   },

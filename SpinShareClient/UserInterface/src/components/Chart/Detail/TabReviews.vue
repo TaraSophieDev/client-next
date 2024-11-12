@@ -1,11 +1,15 @@
 <template>
     <section class="chart-detail-tab-reviews">
+        <NoContent
+            v-if="!reviews?.reviews"
+            :text="t('chart.detail.reviews.noContent')"
+        />
         <div
             class="reviews-list"
             v-if="reviews"
         >
             <ReviewItem
-                v-for="review in reviews.reviews"
+                v-for="review in reviews?.reviews"
                 :key="review.id"
                 v-bind="review"
             />
@@ -18,6 +22,9 @@
 import { ref, onMounted } from 'vue';
 import { getChartReviews } from '@/api/api';
 import ReviewItem from '@/components/Chart/Detail/ReviewItem.vue';
+import NoContent from '../../Common/NoContent.vue';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const props = defineProps({
     id: {
