@@ -7,7 +7,7 @@ import 'floating-vue/dist/style.css';
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css';
 
 import './assets/reset.scss';
-import '@mdi/font/scss/materialdesignicons.scss';
+import '@mdi/font/css/materialdesignicons.min.css';
 
 import App from './App.vue';
 import Router from '@/router';
