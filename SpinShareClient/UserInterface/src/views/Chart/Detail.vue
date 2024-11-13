@@ -119,14 +119,14 @@
                             @click="handleOpenInBrowser"
                         />
                         <SpinButton
-                            icon="flag-outline"
-                            v-tooltip="t('general.report')"
-                            @click="handleReport"
-                        />
-                        <SpinButton
                             icon="link"
                             v-tooltip="t('general.copyLink')"
                             @click="handleCopyLink"
+                        />
+                        <SpinButton
+                            icon="flag-outline"
+                            v-tooltip="t('general.report')"
+                            @click="handleReport"
                         />
                     </div>
                 </div>
