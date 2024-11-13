@@ -47,6 +47,11 @@
                             v-tooltip="t('general.report')"
                             @click="handleReport"
                         />
+                        <SpinButton
+                            icon="link"
+                            v-tooltip="t('general.copyLink')"
+                            @click="handleCopyLink"
+                        />
                     </div>
                 </div>
             </header>
@@ -153,6 +158,10 @@ const handleReport = () => {
         }),
     );
 };
+
+const handleCopyLink = () => {
+    navigator.clipboard.writeText('https://spinsha.re/user/' + user.value.id);
+}
 
 const handleOpenInBrowser = () => {
     window.external.sendMessage(

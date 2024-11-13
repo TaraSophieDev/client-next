@@ -123,6 +123,11 @@
                             v-tooltip="t('general.report')"
                             @click="handleReport"
                         />
+                        <SpinButton
+                            icon="link"
+                            v-tooltip="t('general.copyLink')"
+                            @click="handleCopyLink"
+                        />
                     </div>
                 </div>
             </header>
@@ -278,6 +283,10 @@ const handleReport = () => {
         }),
     );
 };
+
+const handleCopyLink = () => {
+    navigator.clipboard.writeText('https://spinsha.re/song/' + chart.value.id);
+}
 
 const handleAddToQueue = () => {
     window.external.sendMessage(
